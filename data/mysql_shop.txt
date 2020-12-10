@@ -1,0 +1,42 @@
+# データベースinventの作成
+set names utf8;
+drop database if exists invent;
+create database invent character set utf8 collate utf8_general_ci;
+
+# ユーザーteam13に、パスワードbindを設定し、データベースinventに対するすべての権限を付与
+grant all privileges on invent.* to team13@localhost identified by 'bind';
+
+use invent;
+
+# テーブルitemsの作成
+create table items(
+	itemId	    int auto_increment primary key,
+	itemName	varchar(50) not null,
+	userId	    int not null,
+	iventId     int not null,
+	image	    varchar(20),
+	invent      int,
+	inventn     int,
+	price       int,
+    comment     varchar(200),
+	sales       int
+);
+
+drop table if exists users;
+create table users(
+    userId	    int auto_increment primary key,
+    userName	varchar(50) not null,
+    zip         char(7) default '',
+    address	    varchar(50) default '',
+    email	    varchar(20) default '',
+    password    varchar(20)
+);
+
+create table ivent(
+	iventId     int auto_increment primary key,
+	userId      int not null,
+	iventName   varchar(50) not null,
+	sdate       datetime,
+	edate       datetime,
+	address     varchar(50) default ''
+)
